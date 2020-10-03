@@ -35,7 +35,8 @@ class ImageCropOverlay extends React.Component {
     }
 
     render() {
-        const { draggingTL, draggingTM, draggingTR, draggingML, draggingMM, draggingMR, draggingBL, draggingBM, draggingBR, initialTop, initialLeft, initialHeight, initialWidth, offsetTop, offsetLeft}  = this.state
+        const { round } = this.props;
+        const { draggingTL, draggingTM, draggingTR, draggingML, draggingMM, draggingMR, draggingBL, draggingBM, draggingBR, initialTop, initialLeft, initialHeight, initialWidth, offsetTop, offsetLeft } = this.state
         const style = {}
 
         style.top = initialTop + ((draggingTL || draggingTM || draggingTR || draggingMM) ? offsetTop : 0)
@@ -56,49 +57,50 @@ class ImageCropOverlay extends React.Component {
             style.height = this.props.minHeight
         }
         return (
-            <View {...this.panResponder.panHandlers} style={[{flex: 1, justifyContent: 'center', alignItems: 'center', position: 'absolute', borderStyle: 'solid', borderWidth: 2, borderColor: '#a4a4a4', backgroundColor: 'rgb(0,0,0,0.5)'}, style]}>
-                <View style={{flexDirection: 'row', width: '100%', flex: 1/3, backgroundColor: 'transparent'}}>
-                    <View style={{borderWidth: '#a4a4a4', borderWidth: 0, backgroundColor: draggingTL ? 'transparent' : 'transparent', flex: 1/3, height: '100%'}}></View>
-                    <View style={{borderWidth: '#a4a4a4', borderWidth: 0, backgroundColor: draggingTM ? 'transparent' : 'transparent', flex: 1/3, height: '100%'}}></View>
-                    <View style={{borderWidth: '#a4a4a4', borderWidth: 0, backgroundColor: draggingTR ? 'transparent' : 'transparent', flex: 1/3, height: '100%'}}></View>
+            <View {...this.panResponder.panHandlers} style={[round && { borderRadius: 150 }, { flex: 1, justifyContent: 'center', alignItems: 'center', position: 'absolute', borderStyle: 'solid', borderWidth: 2, borderColor: '#a4a4a4', backgroundColor: 'rgb(0,0,0,0.5)' }, style]}>
+                <View style={{ flexDirection: 'row', width: '100%', flex: 1 / 3, backgroundColor: 'transparent' }}>
+                    <View style={{ borderWidth: '#a4a4a4', borderWidth: 0, backgroundColor: draggingTL ? 'transparent' : 'transparent', flex: 1 / 3, height: '100%' }}></View>
+                    <View style={{ borderWidth: '#a4a4a4', borderWidth: 0, backgroundColor: draggingTM ? 'transparent' : 'transparent', flex: 1 / 3, height: '100%' }}></View>
+                    <View style={{ borderWidth: '#a4a4a4', borderWidth: 0, backgroundColor: draggingTR ? 'transparent' : 'transparent', flex: 1 / 3, height: '100%' }}></View>
                 </View>
-                <View style={{flexDirection: 'row', width: '100%', flex: 1/3, backgroundColor: 'transparent'}}>
-                    <View style={{borderWidth: '#a4a4a4', borderWidth: 0, backgroundColor: draggingML ? 'transparent' : 'transparent', flex: 1/3, height: '100%'}}></View>
-                    <View style={{borderWidth: '#a4a4a4', borderWidth: 0, backgroundColor: draggingMM ? 'transparent' : 'transparent', flex: 1/3, height: '100%'}}></View>
-                    <View style={{borderWidth: '#a4a4a4', borderWidth: 0, backgroundColor: draggingMR ? 'transparent' : 'transparent', flex: 1/3, height: '100%'}}></View>
+                <View style={{ flexDirection: 'row', width: '100%', flex: 1 / 3, backgroundColor: 'transparent' }}>
+                    <View style={{ borderWidth: '#a4a4a4', borderWidth: 0, backgroundColor: draggingML ? 'transparent' : 'transparent', flex: 1 / 3, height: '100%' }}></View>
+                    <View style={{ borderWidth: '#a4a4a4', borderWidth: 0, backgroundColor: draggingMM ? 'transparent' : 'transparent', flex: 1 / 3, height: '100%' }}></View>
+                    <View style={{ borderWidth: '#a4a4a4', borderWidth: 0, backgroundColor: draggingMR ? 'transparent' : 'transparent', flex: 1 / 3, height: '100%' }}></View>
                 </View>
-                <View style={{flexDirection: 'row', width: '100%', flex: 1/3, backgroundColor: 'transparent'}}>
-                    <View style={{borderWidth: '#a4a4a4', borderWidth: 0, backgroundColor: draggingBL ? 'transparent' : 'transparent', flex: 1/3, height: '100%'}}></View>
-                    <View style={{borderWidth: '#a4a4a4', borderWidth: 0, backgroundColor: draggingBM ? 'transparent' : 'transparent', flex: 1/3, height: '100%'}}></View>
-                    <View style={{borderWidth: '#a4a4a4', borderWidth: 0, backgroundColor: draggingBR ? 'transparent' : 'transparent', flex: 1/3, height: '100%'}}></View>
+                <View style={{ flexDirection: 'row', width: '100%', flex: 1 / 3, backgroundColor: 'transparent' }}>
+                    <View style={{ borderWidth: '#a4a4a4', borderWidth: 0, backgroundColor: draggingBL ? 'transparent' : 'transparent', flex: 1 / 3, height: '100%' }}></View>
+                    <View style={{ borderWidth: '#a4a4a4', borderWidth: 0, backgroundColor: draggingBM ? 'transparent' : 'transparent', flex: 1 / 3, height: '100%' }}></View>
+                    <View style={{ borderWidth: '#a4a4a4', borderWidth: 0, backgroundColor: draggingBR ? 'transparent' : 'transparent', flex: 1 / 3, height: '100%' }}></View>
                 </View>
-                <View style={{top: 0, left: 0, width: '100%', height: '100%', position: 'absolute', backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
-                    <View style={{flex: 1/3, flexDirection: 'row'}}>
+                <View style={[round && { borderRadius: 150 }, { top: 0, left: 0, width: '100%', height: '100%', position: 'absolute', backgroundColor: 'rgba(0, 0, 0, 0.5)' }]}>
+                    <View style={{ flex: 1 / 3, flexDirection: 'row' }}>
                         <View style={{ flex: 3, borderRightWidth: 1, borderBottomWidth: 1, borderColor: '#c9c9c9', borderStyle: 'solid' }}>
-                            <View style={{ position: 'absolute', left: 5, top: 5, borderLeftWidth: 2, borderTopWidth: 2, height: 48, width: 48, borderColor: '#f4f4f4', borderStyle: 'solid' }}/>
+                            <View style={{ position: 'absolute', left: 5, top: 5, borderLeftWidth: 2, borderTopWidth: 2, height: 48, width: 48, borderColor: '#f4f4f4', borderStyle: 'solid' }} />
                         </View>
                         <View style={{ flex: 3, borderRightWidth: 1, borderBottomWidth: 1, borderColor: '#c9c9c9', borderStyle: 'solid' }}>
                         </View>
-                        <View style={{ flex: 3,  borderBottomWidth: 1, borderColor: '#c9c9c9', borderStyle: 'solid' }}>
-                            <View style={{ position: 'absolute', right: 5, top: 5, borderRightWidth: 2, borderTopWidth: 2, height: 48, width: 48, borderColor: '#f4f4f4', borderStyle: 'solid' }}/>
+                        <View style={{ flex: 3, borderBottomWidth: 1, borderColor: '#c9c9c9', borderStyle: 'solid' }}>
+                            <View style={{ position: 'absolute', right: 5, top: 5, borderRightWidth: 2, borderTopWidth: 2, height: 48, width: 48, borderColor: '#f4f4f4', borderStyle: 'solid' }} />
                         </View>
                     </View>
-                    <View style={{flex: 1/3, flexDirection: 'row'}}>
+                    <View style={{ flex: 1 / 3, flexDirection: 'row' }}>
                         <View style={{ flex: 3, borderRightWidth: 1, borderBottomWidth: 1, borderColor: '#c9c9c9', borderStyle: 'solid' }}>
                         </View>
                         <View style={{ flex: 3, borderRightWidth: 1, borderBottomWidth: 1, borderColor: '#c9c9c9', borderStyle: 'solid' }}>
                         </View>
-                        <View style={{ flex: 3,  borderBottomWidth: 1, borderColor: '#c9c9c9', borderStyle: 'solid' }}>
+                        <View style={{ flex: 3, borderBottomWidth: 1, borderColor: '#c9c9c9', borderStyle: 'solid' }}>
                         </View>
                     </View>
-                    <View style={{flex: 1/3, flexDirection: 'row'}}>
+
+                    <View style={{ flex: 1 / 3, flexDirection: 'row' }}>
                         <View style={{ flex: 3, borderRightWidth: 1, borderColor: '#c9c9c9', borderStyle: 'solid', position: 'relative', }}>
-                            <View style={{ position: 'absolute', left: 5, bottom: 5, borderLeftWidth: 2, borderBottomWidth: 2, height: 48, width: 48, borderColor: '#f4f4f4', borderStyle: 'solid' }}/>
+                            <View style={{ position: 'absolute', left: 5, bottom: 5, borderLeftWidth: 2, borderBottomWidth: 2, height: 48, width: 48, borderColor: '#f4f4f4', borderStyle: 'solid' }} />
                         </View>
                         <View style={{ flex: 3, borderRightWidth: 1, borderColor: '#c9c9c9', borderStyle: 'solid' }}>
                         </View>
-                        <View style={{ flex: 3,  position: 'relative'  }}>
-                            <View style={{ position: 'absolute', right: 5, bottom: 5, borderRightWidth: 2, borderBottomWidth: 2, height: 48, width: 48, borderColor: '#f4f4f4', borderStyle: 'solid' }}/>
+                        <View style={{ flex: 3, position: 'relative' }}>
+                            <View style={{ position: 'absolute', right: 5, bottom: 5, borderRightWidth: 2, borderBottomWidth: 2, height: 48, width: 48, borderColor: '#f4f4f4', borderStyle: 'solid' }} />
                         </View>
                     </View>
                 </View>
@@ -140,29 +142,29 @@ class ImageCropOverlay extends React.Component {
         return true
     }
 
-  // We were granted responder status! Let's update the UI
+    // We were granted responder status! Let's update the UI
     handlePanResponderGrant = (event) => {
         // console.log(event.nativeEvent.locationX + ', ' + event.nativeEvent.locationY)
 
         let selectedItem = this.getTappedItem(event.nativeEvent.pageX, event.nativeEvent.pageY)
         if (selectedItem == 'tl') {
-            this.setState({draggingTL: true})
+            this.setState({ draggingTL: true })
         } else if (selectedItem == 'tm') {
-            this.setState({draggingTM: true})
+            this.setState({ draggingTM: true })
         } else if (selectedItem == 'tr') {
-            this.setState({draggingTR: true})
+            this.setState({ draggingTR: true })
         } else if (selectedItem == 'ml') {
-            this.setState({draggingML: true})
+            this.setState({ draggingML: true })
         } else if (selectedItem == 'mm') {
-            this.setState({draggingMM: true})
+            this.setState({ draggingMM: true })
         } else if (selectedItem == 'mr') {
-            this.setState({draggingMR: true})
+            this.setState({ draggingMR: true })
         } else if (selectedItem == 'bl') {
-            this.setState({draggingBL: true})
+            this.setState({ draggingBL: true })
         } else if (selectedItem == 'bm') {
-            this.setState({draggingBM: true})
+            this.setState({ draggingBM: true })
         } else if (selectedItem == 'br') {
-            this.setState({draggingBR: true})
+            this.setState({ draggingBR: true })
         }
     }
 
@@ -177,7 +179,7 @@ class ImageCropOverlay extends React.Component {
 
     // When the touch/mouse is lifted
     handlePanResponderEnd = (e, gestureState) => {
-        const {initialTop, initialLeft, initialWidth, initialHeight, draggingTL, draggingTM, draggingTR, draggingML, draggingMM, draggingMR, draggingBL, draggingBM, draggingBR } = this.state
+        const { initialTop, initialLeft, initialWidth, initialHeight, draggingTL, draggingTM, draggingTR, draggingML, draggingMM, draggingMR, draggingBL, draggingBM, draggingBR } = this.state
 
         const state = {
             draggingTL: false,
