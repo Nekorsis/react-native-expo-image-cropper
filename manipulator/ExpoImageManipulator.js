@@ -282,6 +282,8 @@ class ExpoImageManipulator extends Component {
             minWidth,
             minHeight,
             round,
+            fixedWidth,
+            fixedHeight,
         } = this.props
         const {
             uri,
@@ -299,8 +301,8 @@ class ExpoImageManipulator extends Component {
 
         let cropRatio = originalHeight / width
 
-        let cropWidth = imageRatio < cropRatio ? width : originalHeight / imageRatio
-        let cropHeight = imageRatio < cropRatio ? width * imageRatio : originalHeight
+        let cropWidth = fixedWidth ? fixedWidth : imageRatio < cropRatio ? width : originalHeight / imageRatio
+        let cropHeight = fixedHeight ? fixedHeight : imageRatio < cropRatio ? width * imageRatio : originalHeight
 
         if (round) {
             cropWidth = 150,
@@ -310,8 +312,8 @@ class ExpoImageManipulator extends Component {
         let cropInitialTop = (originalHeight - cropHeight) / 2.0
         let cropInitialLeft = (width - cropWidth) / 2.0
 
-        const overlayMinWidth = minWidth ? minWidth : 150;
-        const overlayMinHeight = minHeight ? minHeight : 150;
+        const overlayMinWidth = fixedWidth ? fixedWidth : 150;
+        const overlayMinHeight = fixedHeight ? fixedHeight : 150;
 
         if (this.currentSize.width == 0 && cropMode) {
             this.currentSize.width = cropWidth;
@@ -406,7 +408,15 @@ class ExpoImageManipulator extends Component {
                                     this.currentSize.height = height;
                                     this.currentPos.top = top
                                     this.currentPos.left = left
-                                }} round={round} initialWidth={cropWidth} initialHeight={cropHeight} initialTop={cropInitialTop} initialLeft={cropInitialLeft} minHeight={overlayMinHeight} minWidth={overlayMinWidth} />
+                                }}
+                                round={round}
+                                initialWidth={cropWidth}
+                                initialHeight={cropHeight}
+                                initialTop={cropInitialTop}
+                                initialLeft={cropInitialLeft}
+                                minHeight={overlayMinHeight}
+                                minWidth={overlayMinWidth}
+                                />
                             )
                             }
                         </ScrollView>
@@ -447,5 +457,7 @@ ExpoImageManipulator.propTypes = {
     resizeVelocity: PropTypes.number,
     round: PropTypes.bool,
     minWidth: PropTypes.number,
-    minHeight: PropTypes.number
+    minHeight: PropTypes.number,
+    fixedWidth: PropTypes.number,
+    fixedHeight: PropTypes.number,
 }
